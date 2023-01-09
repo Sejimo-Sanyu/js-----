@@ -1,0 +1,32 @@
+body {
+    margin: 5px;
+    padding: 5px 20px;
+  }
+
+
+.main header{
+    font-size: 40px;
+    font-weight: bold;
+    color: rgba(2, 1, 10, 0.952);
+    top: 100px;
+    text-align: center;
+}
+.main p {
+    font-size: 30px;
+    margin-top: 30px;
+    top: 200px;
+    bottom: 100px;
+    color: rgb(2, 2, 15);
+    text-align: center;
+}
+
+.game header {
+    font-size: 25px;
+    margin-top: 150px;
+    font-weight: bold;
+    color: rgba(2, 1, 10, 0.952);
+}
+.game {
+    font-size: 20px;
+    color: rgba(2, 1, 10, 0.952);
+}

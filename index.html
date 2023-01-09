@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>QRコード生成</title>
+</head>
+<body>
+    <div class="main">
+        <header>QRコード作成</header>
+        <p>以下にURLを入力してQRコードを作成しよう！</p>
+        </div>
+        </div>
+    </div>
+
+    <div class = "qr-input">
+        <input type = "text" name ="" value ="" id ="ip-qrcode" placeholder="URLを入力"><br>
+        <div class = "option">
+            <input type = "number" pattern="\d*" onpaste = "return false" nama = "" value ="" placeholder="size(px)" id="size">
+            <button type="button" id="make">作成</button>
+        </div>
+    </div>
+    <div class="" id="op-qrcode"></div>
+    <a class="hiden" id ="link"></a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery.qrcode.min.js" charset="utf-8"></script>
+    <script src="qr-code.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="qr-code.css">
+
+    
+<!-- ここからゲーム部分（見えない部分） -->
+<ht>
+<head>
+<script>
+
+	let card = 1;// 場にあるトランプのカード番号
+
+	let Hi_L = 0;// Low(0) と High(1) どっちを選んだか仮の数字（実際にはクリックで決める）
+	let Result = "●●を選んで、あなたの●●";//勝ち負けの結果
+
+
+function High_Low(Hi_L) {
+
+        document.getElementById("Card_img_Before").src="s_" + card + ".jpg";
+
+	let trump = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,]; // ハイアンドローをするカード番号
+	let trump_n = Math.floor( Math.random() * 13) +1 ;// ランダムで数字を決める
+
+
+	if (card < trump[trump_n]) {//賭けカードが、伏せカードより大きい場合
+		if (Hi_L === 0){ Result = " LOWを選んで、あなたの<span style='background:blue;'>『 負け 』</span>";}
+		if (Hi_L === 1){ Result = " HIGHを選んで、あなたの<span style='background:red;'>【 勝ち 】</span>";}
+	}
+
+	else if (card > trump[trump_n]) {//賭けカードが、伏せカードより小さい場合
+		if (Hi_L === 0){ Result = " HIGHを選んで、あなたの<span style='background:red;'>【 勝ち 】</span>";}
+		if (Hi_L === 1){ Result = " LOWを選んで、あなたの<span style='background:blue;'>『 負け 』</span>";}
+	}
+
+	else {Result = "引き分け！！";}
+
+        document.getElementById("Card_img_After").src="s_" + trump_n + ".jpg";
+
+	document.getElementById("After").innerHTML ="伏せカードは" + trump[trump_n] + Result + "<br />次のカードが今の数字より高いか低いか考えてみよう！";
+	document.getElementById("Before").innerHTML ="場にあるカードは" + card ;
+
+	card = trump[trump_n];//場にあるカードを新しく引いたカードに変える
+
+}
+
+</script>
+</head>
+<!-- ↓ここから見える部分↓ -->
+<div class ="game">
+<header>トランプミニゲーム(High＆Low)</header>
+	<img id="Card_img_Before" src="s_1.jpg" width="100" height="150" align="left">
+	＊
+	<img id="Card_img_After" src="s_0.jpg" width="100" height="150">
+
+	<p id="Before">場にあるカードは１</p>
+	<p id="After">次のカードは場にあるカードより高いか低いか考えてみよう！</p>
+
+	<input type="button" value="High" onclick="High_Low(1);"/>
+	<input type="button" value="Low" onclick="High_Low(0);"/>
+</div>
+  </body>
+</html>
